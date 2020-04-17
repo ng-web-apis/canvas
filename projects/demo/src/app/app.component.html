@@ -1,1 +1,64 @@
-Here be dragons
+<section>
+    <fieldset>
+        <label>
+            <span>x:</span>
+            <input type="range" min="0" max="300" [(ngModel)]="x1" />
+        </label>
+        <label>
+            <span>y:</span>
+            <input type="range" min="0" max="150" [(ngModel)]="y1" />
+        </label>
+        <label>
+            <span>width:</span>
+            <input type="range" min="0" max="300" [(ngModel)]="w1" />
+        </label>
+        <label>
+            <span>height:</span>
+            <input type="range" min="0" max="150" [(ngModel)]="h1" />
+        </label>
+        <label>
+            <span>color:</span>
+            <input type="color" [(ngModel)]="c1" />
+        </label>
+    </fieldset>
+    <fieldset>
+        <label>
+            <span>x:</span>
+            <input type="range" min="0" max="300" [(ngModel)]="x2" />
+        </label>
+        <label>
+            <span>y:</span>
+            <input type="range" min="0" max="150" [(ngModel)]="y2" />
+        </label>
+        <label>
+            <span>width:</span>
+            <input type="range" min="0" max="300" [(ngModel)]="w2" />
+        </label>
+        <label>
+            <span>height:</span>
+            <input type="range" min="0" max="150" [(ngModel)]="h2" />
+        </label>
+        <label>
+            <span>color:</span>
+            <input type="color" [(ngModel)]="c2" />
+        </label>
+    </fieldset>
+</section>
+<canvas waCanvas2d class="canvas">
+    <ng-container
+        waFillRect
+        [waFillStyle]="c1"
+        [x]="x1"
+        [y]="y1"
+        [width]="w1"
+        [height]="h1"
+    ></ng-container>
+    <ng-container
+        waFillRect
+        [waFillStyle]="c2"
+        [x]="x2"
+        [y]="y2"
+        [width]="w2"
+        [height]="h2"
+    ></ng-container>
+</canvas>

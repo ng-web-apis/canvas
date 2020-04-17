@@ -7,6 +7,7 @@ import {
 import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
+import {CanvasModule} from '@ng-web-apis/canvas';
 import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app.routes';
 
@@ -15,6 +16,7 @@ import {AppRoutingModule} from './app.routes';
     imports: [
         CommonModule,
         FormsModule,
+        CanvasModule,
         BrowserModule.withServerTransition({appId: 'demo'}),
         AppRoutingModule,
     ],
