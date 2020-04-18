@@ -1,27 +1,33 @@
-import {Inject, Injectable, OnDestroy} from '@angular/core';
+import {Inject, Injectable, OnDestroy, Optional, Self} from '@angular/core';
 import {ANIMATION_FRAME} from '@ng-web-apis/common';
 import {Observable, Subscription} from 'rxjs';
 import {CanvasDrawStep} from '../interfaces/canvas-draw-step';
 import {CANVAS_DRAW_STEPS} from '../tokens/canvas-draw-steps';
+import {CANVAS_RENDERING_CONTEXT} from '../tokens/canvas-rendering-context';
+import {Context2dProcessor} from '../types/context-processor';
 
+// @dynamic
 @Injectable()
 export class DrawService implements OnDestroy {
-    private draw: Function = () => {};
+    private draw: Context2dProcessor = () => {};
 
     private readonly subscription: Subscription;
 
     constructor(
-        @Inject(CANVAS_DRAW_STEPS) steps: CanvasDrawStep[],
+        @Optional() @Self() @Inject(CANVAS_DRAW_STEPS) drawSteps: CanvasDrawStep[] | null,
+        @Inject(CANVAS_RENDERING_CONTEXT) context: CanvasRenderingContext2D,
         @Inject(ANIMATION_FRAME) animationFrame$: Observable<number>,
     ) {
+        const steps = drawSteps || [];
+
         this.subscription = animationFrame$.subscribe(() => {
-            steps.forEach(step => step.beforeHook());
-            this.draw();
-            steps.forEach(step => step.afterHook());
+            steps.forEach(step => step.beforeHook(context));
+            this.draw(context);
+            steps.forEach(step => step.afterHook(context));
         });
     }
 
-    init(draw: Function) {
+    init(draw: Context2dProcessor) {
         this.draw = draw;
     }
 

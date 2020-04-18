@@ -9,12 +9,13 @@ export function canvasContextFactory({
     const context = nativeElement.getContext('2d');
 
     if (!context) {
-        throw new Error('Context was already requested');
+        throw new Error('Context of different type was already requested');
     }
 
     return context;
 }
 
+// @dynamic
 @Directive({
     selector: 'canvas[waCanvas2d]',
     providers: [

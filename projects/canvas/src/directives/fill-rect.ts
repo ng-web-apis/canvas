@@ -1,6 +1,5 @@
 import {Directive, Inject, Input} from '@angular/core';
 import {DrawService} from '../services/draw.service';
-import {CANVAS_RENDERING_CONTEXT} from '../tokens/canvas-rendering-context';
 
 @Directive({
     selector: '[waFillRect]',
@@ -19,11 +18,8 @@ export class FillRectDirective {
     @Input()
     height = 0;
 
-    constructor(
-        @Inject(CANVAS_RENDERING_CONTEXT) context: CanvasRenderingContext2D,
-        @Inject(DrawService) drawService: DrawService,
-    ) {
-        drawService.init(() => {
+    constructor(@Inject(DrawService) drawService: DrawService) {
+        drawService.init(context => {
             context.fillRect(this.x, this.y, this.width, this.height);
         });
     }

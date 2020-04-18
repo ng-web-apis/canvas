@@ -19,5 +19,8 @@ export * from './steps/fill-style';
 export * from './tokens/canvas-draw-steps';
 export * from './tokens/canvas-rendering-context';
 
+/* Types */
+export * from './types/context-processor';
+
 /* Modules */
 export * from './module';
