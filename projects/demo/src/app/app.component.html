@@ -1,5 +1,25 @@
 <section>
     <fieldset>
+        <label for="file">Image:</label>
+        <input #file id="file" type="file" accept="image/*" (input)="onFile(file)" />
+        <label>
+            <span>dX:</span>
+            <input type="range" min="0" max="300" [(ngModel)]="dX" />
+        </label>
+        <label>
+            <span>dY:</span>
+            <input type="range" min="0" max="150" [(ngModel)]="dY" />
+        </label>
+        <label>
+            <span>dWidth:</span>
+            <input type="range" min="0" max="300" [(ngModel)]="dWidth" />
+        </label>
+        <label>
+            <span>dHeight:</span>
+            <input type="range" min="0" max="150" [(ngModel)]="dHeight" />
+        </label>
+    </fieldset>
+    <fieldset>
         <label>
             <span>x:</span>
             <input type="range" min="0" max="300" [(ngModel)]="x1" />
@@ -46,16 +66,23 @@
 </section>
 <canvas waCanvas2d class="canvas">
     <ng-container
-        waFillRect
-        [waFillStyle]="c1"
+        [waCanvasDrawImage]="image"
+        [dX]="dX"
+        [dY]="dY"
+        [dWidth]="dWidth"
+        [dHeight]="dHeight"
+    ></ng-container>
+    <ng-container
+        waCanvasFillRect
+        [waCanvasFillStyle]="c1"
         [x]="x1"
         [y]="y1"
         [width]="w1"
         [height]="h1"
     ></ng-container>
     <ng-container
-        waFillRect
-        [waFillStyle]="c2"
+        waCanvasFillRect
+        [waCanvasFillStyle]="c2"
         [x]="x2"
         [y]="y2"
         [width]="w2"

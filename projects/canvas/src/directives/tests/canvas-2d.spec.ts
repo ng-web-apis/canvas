@@ -8,8 +8,9 @@ describe('Canvas2dDirective', () => {
         template: `
             <canvas #canvas waCanvas2d width="100" height="100">
                 <ng-container
-                    waFillRect
-                    waFillStyle="red"
+                    waCanvasFillRect
+                    waCanvasFillStyle="red"
+                    waCanvasFilter="hue-rotate(180deg)"
                     [x]="10"
                     [y]="10"
                     [height]="20"
@@ -20,7 +21,7 @@ describe('Canvas2dDirective', () => {
     })
     class TestComponent {
         @ViewChild('canvas', {read: CANVAS_RENDERING_CONTEXT})
-        context!: CanvasRenderingContext2D;
+        readonly context!: CanvasRenderingContext2D;
     }
 
     let fixture: ComponentFixture<TestComponent>;
@@ -47,7 +48,7 @@ describe('Canvas2dDirective', () => {
         expect(testComponent.context instanceof CanvasRenderingContext2D).toBe(true);
     });
 
-    it('draws a rectangle at given coordinates of given color', done => {
+    it('draws a rectangle at given coordinates of given color with applied filter', done => {
         setTimeout(() => {
             expect([...testComponent.context.getImageData(5, 5, 1, 1).data]).toEqual([
                 0,
@@ -56,12 +57,12 @@ describe('Canvas2dDirective', () => {
                 0,
             ]);
             expect([...testComponent.context.getImageData(25, 25, 1, 1).data]).toEqual([
-                255,
                 0,
-                0,
+                109,
+                109,
                 255,
             ]);
             done();
-        });
+        }, 50);
     });
 });

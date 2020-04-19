@@ -2,27 +2,27 @@ import {Directive, Input} from '@angular/core';
 import {CanvasDrawStep} from '../interfaces/canvas-draw-step';
 import {CANVAS_DRAW_STEPS} from '../tokens/canvas-draw-steps';
 
-const DEFAULT = '#000';
+const DEFAULT = 'none';
 
 @Directive({
-    selector: '[waCanvasFillStyle]',
+    selector: '[waCanvasFilter]',
     providers: [
         {
             provide: CANVAS_DRAW_STEPS,
-            useExisting: FillStyleDirective,
+            useExisting: FilterDirective,
             multi: true,
         },
     ],
 })
-export class FillStyleDirective implements CanvasDrawStep {
+export class FilterDirective implements CanvasDrawStep {
     @Input()
-    waCanvasFillStyle: string | CanvasGradient | CanvasPattern = DEFAULT;
+    waCanvasFilter = DEFAULT;
 
     beforeHook(context: CanvasRenderingContext2D) {
-        context.fillStyle = this.waCanvasFillStyle;
+        context.filter = this.waCanvasFilter;
     }
 
     afterHook(context: CanvasRenderingContext2D) {
-        context.fillStyle = DEFAULT;
+        context.filter = DEFAULT;
     }
 }

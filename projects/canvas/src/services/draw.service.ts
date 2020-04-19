@@ -1,4 +1,4 @@
-import {Inject, Injectable, OnDestroy, Optional, Self} from '@angular/core';
+import {Inject, Injectable, OnDestroy} from '@angular/core';
 import {ANIMATION_FRAME} from '@ng-web-apis/common';
 import {Observable, Subscription} from 'rxjs';
 import {CanvasDrawStep} from '../interfaces/canvas-draw-step';
@@ -14,12 +14,10 @@ export class DrawService implements OnDestroy {
     private readonly subscription: Subscription;
 
     constructor(
-        @Optional() @Self() @Inject(CANVAS_DRAW_STEPS) drawSteps: CanvasDrawStep[] | null,
+        @Inject(CANVAS_DRAW_STEPS) steps: CanvasDrawStep[],
         @Inject(CANVAS_RENDERING_CONTEXT) context: CanvasRenderingContext2D,
         @Inject(ANIMATION_FRAME) animationFrame$: Observable<number>,
     ) {
-        const steps = drawSteps || [];
-
         this.subscription = animationFrame$.subscribe(() => {
             steps.forEach(step => step.beforeHook(context));
             this.draw(context);

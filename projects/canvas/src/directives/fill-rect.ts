@@ -2,7 +2,7 @@ import {Directive, Inject, Input} from '@angular/core';
 import {DrawService} from '../services/draw.service';
 
 @Directive({
-    selector: '[waFillRect]',
+    selector: '[waCanvasFillRect]',
     providers: [DrawService],
 })
 export class FillRectDirective {

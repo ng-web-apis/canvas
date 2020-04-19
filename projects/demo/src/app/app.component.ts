@@ -18,4 +18,23 @@ export class AppComponent {
     w2 = 100;
     h2 = 50;
     c2 = '#00ff00';
+
+    dX = 0;
+    dY = 0;
+    dWidth = 100;
+    dHeight = 100;
+
+    readonly image = new Image();
+
+    constructor() {
+        this.image.onload = () => {
+            URL.revokeObjectURL(this.image.src);
+        };
+    }
+
+    onFile(input: HTMLInputElement) {
+        if (input.files) {
+            this.image.src = URL.createObjectURL(input.files[0]);
+        }
+    }
 }
