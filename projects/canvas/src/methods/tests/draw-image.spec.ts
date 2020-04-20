@@ -1,12 +1,14 @@
 import {Component, ViewChild} from '@angular/core';
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {CanvasModule} from '../../module';
-import {CANVAS_RENDERING_CONTEXT} from '../../tokens/canvas-rendering-context';
+import {CANVAS_2D_CONTEXT} from '../../tokens/canvas-2d-context';
 
 describe('Canvas2dDirective', () => {
     @Component({
         template: `
             <canvas #canvas waCanvas2d width="100" height="100">
+                <!--Empty image doesn't throw (in case it is still loading)-->
+                <ng-container [waCanvasDrawImage]="loading"></ng-container>
                 <ng-container [waCanvasDrawImage]="image"></ng-container>
                 <ng-container
                     [waCanvasDrawImage]="image"
@@ -15,18 +17,36 @@ describe('Canvas2dDirective', () => {
                     [dWidth]="10"
                     [dHeight]="10"
                 ></ng-container>
+                <ng-container
+                    [waCanvasDrawImage]="offset"
+                    [sX]="1"
+                    [sY]="1"
+                    [sWidth]="1"
+                    [sHeight]="1"
+                    [dX]="30"
+                    [dY]="30"
+                    [dWidth]="1"
+                    [dHeight]="1"
+                ></ng-container>
             </canvas>
         `,
     })
     class TestComponent {
-        @ViewChild('canvas', {read: CANVAS_RENDERING_CONTEXT})
+        @ViewChild('canvas', {read: CANVAS_2D_CONTEXT})
         readonly context!: CanvasRenderingContext2D;
 
         readonly image = new Image();
 
+        readonly offset = new Image();
+
+        readonly loading?: ImageBitmap;
+
         constructor() {
             this.image.src =
                 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8DwHwAFBQIAX8jx0gAAAABJRU5ErkJggg==';
+
+            this.offset.src =
+                'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAAWSURBVBhXY/zPwABEDAxMIILxPwMDACIYAwJtzRz5AAAAAElFTkSuQmCC';
         }
     }
 
@@ -87,6 +107,18 @@ describe('Canvas2dDirective', () => {
                 0,
                 0,
                 0,
+            ]);
+            done();
+        }, 50);
+    });
+
+    it('draws an image with offset in the source', done => {
+        setTimeout(() => {
+            expect([...testComponent.context.getImageData(30, 30, 1, 1).data]).toEqual([
+                0,
+                255,
+                0,
+                255,
             ]);
             done();
         }, 50);

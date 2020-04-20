@@ -1,18 +1,26 @@
 import {Component, ViewChild} from '@angular/core';
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {CanvasModule} from '../../module';
-import {CANVAS_RENDERING_CONTEXT} from '../../tokens/canvas-rendering-context';
+import {CANVAS_2D_CONTEXT} from '../../tokens/canvas-2d-context';
 
-describe('Canvas2dDirective', () => {
+describe('GlobalCompositeOperationDirective', () => {
     @Component({
         template: `
             <canvas #canvas waCanvas2d width="100" height="100">
                 <ng-container
                     waCanvasFillRect
                     waCanvasFillStyle="red"
-                    waCanvasFilter="hue-rotate(180deg)"
-                    [x]="10"
-                    [y]="10"
+                    [x]="0"
+                    [y]="0"
+                    [height]="20"
+                    [width]="20"
+                ></ng-container>
+                <ng-container
+                    waCanvasFillRect
+                    waCanvasFillStyle="green"
+                    waCanvasGlobalCompositeOperation="screen"
+                    [x]="0"
+                    [y]="0"
                     [height]="20"
                     [width]="20"
                 ></ng-container>
@@ -20,7 +28,7 @@ describe('Canvas2dDirective', () => {
         `,
     })
     class TestComponent {
-        @ViewChild('canvas', {read: CANVAS_RENDERING_CONTEXT})
+        @ViewChild('canvas', {read: CANVAS_2D_CONTEXT})
         readonly context!: CanvasRenderingContext2D;
     }
 
@@ -40,26 +48,12 @@ describe('Canvas2dDirective', () => {
         fixture.detectChanges();
     });
 
-    afterAll(() => {
-        fixture.destroy();
-    });
-
-    it('creates context', () => {
-        expect(testComponent.context instanceof CanvasRenderingContext2D).toBe(true);
-    });
-
-    it('draws a rectangle at given coordinates of given color with applied filter', done => {
+    it('overlays layers with given mode', done => {
         setTimeout(() => {
-            expect([...testComponent.context.getImageData(5, 5, 1, 1).data]).toEqual([
+            expect([...testComponent.context.getImageData(0, 0, 1, 1).data]).toEqual([
+                255,
+                128,
                 0,
-                0,
-                0,
-                0,
-            ]);
-            expect([...testComponent.context.getImageData(25, 25, 1, 1).data]).toEqual([
-                0,
-                109,
-                109,
                 255,
             ]);
             done();

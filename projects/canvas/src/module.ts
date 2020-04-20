@@ -1,9 +1,10 @@
 import {NgModule} from '@angular/core';
-import {Canvas2dDirective} from './directives/canvas-2d';
-import {DrawImageDirective} from './directives/draw-image';
-import {FillRectDirective} from './directives/fill-rect';
-import {FillStyleDirective} from './steps/fill-style';
-import {FilterDirective} from './steps/filter';
+import {Canvas2dDirective} from './contexts/canvas-2d';
+import {DrawImageDirective} from './methods/draw-image';
+import {FillRectDirective} from './methods/fill-rect';
+import {FillStyleDirective} from './properties/fill-style';
+import {FilterDirective} from './properties/filter';
+import {GlobalCompositeOperationDirective} from './properties/global-composite-operation';
 
 @NgModule({
     declarations: [
@@ -12,6 +13,7 @@ import {FilterDirective} from './steps/filter';
         FillRectDirective,
         FillStyleDirective,
         FilterDirective,
+        GlobalCompositeOperationDirective,
     ],
     exports: [
         Canvas2dDirective,
@@ -19,6 +21,7 @@ import {FilterDirective} from './steps/filter';
         FillRectDirective,
         FillStyleDirective,
         FilterDirective,
+        GlobalCompositeOperationDirective,
     ],
 })
 export class CanvasModule {}

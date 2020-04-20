@@ -24,6 +24,8 @@ export class AppComponent {
     dWidth = 100;
     dHeight = 100;
 
+    globalCompositeOperation = 'source-over';
+
     readonly image = new Image();
 
     constructor() {

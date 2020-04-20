@@ -62,9 +62,17 @@
             <span>color:</span>
             <input type="color" [(ngModel)]="c2" />
         </label>
+        <label>
+            <span>overlay:</span>
+            <select [(ngModel)]="globalCompositeOperation">
+                <option ngValue="source-over">source-over</option>
+                <option ngValue="multiply">multiply</option>
+                <option ngValue="screen">screen</option>
+            </select>
+        </label>
     </fieldset>
 </section>
-<canvas waCanvas2d class="canvas">
+<canvas waCanvas2d>
     <ng-container
         [waCanvasDrawImage]="image"
         [dX]="dX"
@@ -83,6 +91,7 @@
     <ng-container
         waCanvasFillRect
         [waCanvasFillStyle]="c2"
+        [waCanvasGlobalCompositeOperation]="globalCompositeOperation"
         [x]="x2"
         [y]="y2"
         [width]="w2"

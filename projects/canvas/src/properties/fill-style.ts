@@ -1,6 +1,6 @@
 import {Directive, Input} from '@angular/core';
-import {CanvasDrawStep} from '../interfaces/canvas-draw-step';
-import {CANVAS_DRAW_STEPS} from '../tokens/canvas-draw-steps';
+import {CanvasProperty} from '../interfaces/canvas-property';
+import {CANVAS_PROPERTIES} from '../tokens/canvas-properties';
 
 const DEFAULT = '#000';
 
@@ -8,13 +8,13 @@ const DEFAULT = '#000';
     selector: '[waCanvasFillStyle]',
     providers: [
         {
-            provide: CANVAS_DRAW_STEPS,
+            provide: CANVAS_PROPERTIES,
             useExisting: FillStyleDirective,
             multi: true,
         },
     ],
 })
-export class FillStyleDirective implements CanvasDrawStep {
+export class FillStyleDirective implements CanvasProperty {
     @Input()
     waCanvasFillStyle: string | CanvasGradient | CanvasPattern = DEFAULT;
 

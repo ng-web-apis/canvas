@@ -1,6 +1,6 @@
 import {Directive, Input} from '@angular/core';
-import {CanvasDrawStep} from '../interfaces/canvas-draw-step';
-import {CANVAS_DRAW_STEPS} from '../tokens/canvas-draw-steps';
+import {CanvasProperty} from '../interfaces/canvas-property';
+import {CANVAS_PROPERTIES} from '../tokens/canvas-properties';
 
 const DEFAULT = 'none';
 
@@ -8,13 +8,13 @@ const DEFAULT = 'none';
     selector: '[waCanvasFilter]',
     providers: [
         {
-            provide: CANVAS_DRAW_STEPS,
+            provide: CANVAS_PROPERTIES,
             useExisting: FilterDirective,
             multi: true,
         },
     ],
 })
-export class FilterDirective implements CanvasDrawStep {
+export class FilterDirective implements CanvasProperty {
     @Input()
     waCanvasFilter = DEFAULT;
 

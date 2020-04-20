@@ -2,24 +2,27 @@
  * Public API Surface of @ng-web-apis/canvas
  */
 
-/* Directives */
-export * from './directives/canvas-2d';
-export * from './directives/draw-image';
-export * from './directives/fill-rect';
+/* Contexts */
+export * from './contexts/canvas-2d';
 
 /* Interfaces */
-export * from './interfaces/canvas-draw-step';
+export * from './interfaces/canvas-property';
+
+/* Methods */
+export * from './methods/draw-image';
+export * from './methods/fill-rect';
+
+/* Properties */
+export * from './properties/fill-style';
+export * from './properties/filter';
+export * from './properties/global-composite-operation';
 
 /* Services */
 export * from './services/draw.service';
 
-/* Steps */
-export * from './steps/fill-style';
-export * from './steps/filter';
-
 /* Tokens */
-export * from './tokens/canvas-draw-steps';
-export * from './tokens/canvas-rendering-context';
+export * from './tokens/canvas-2d-context';
+export * from './tokens/canvas-properties';
 
 /* Types */
 export * from './types/context-processor';
