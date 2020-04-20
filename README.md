@@ -1,4 +1,4 @@
-# ![ng-web-apis logo](projects/demo/src/assets/logo.svg) [WIP] Canvas API for Angular
+# ![ng-web-apis logo](projects/demo/src/assets/logo.svg) Canvas API for Angular
 
 > Part of <img src="projects/demo/src/assets/web-api.svg" align="top"> [Web APIs for Angular](https://ng-web-apis.github.io/)
 
@@ -125,6 +125,19 @@ This is equivalent to the following HTML
 And it will give you this:
 
 [![canvas.png](https://i.postimg.cc/MZf2XV83/canvas.png)](https://postimg.cc/7b4QWChS)
+
+## Development status
+
+[Canvas API](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API)
+is a vast topic. This library was created because of personal need for a few
+methods and properties on a 2D context. There is no particular schedule for
+implementing the rest of the API. If you need something that is missing it
+is rather easy to add given existing examples of
+[method](https://github.com/ng-web-apis/canvas/blob/master/projects/canvas/src/methods/fill-rect.ts) and
+[property](https://github.com/ng-web-apis/canvas/blob/master/projects/canvas/src/properties/global-composite-operation.ts) directives so
+PRs are very welcome. Alternatively, feel free to
+[file an issue](https://github.com/ng-web-apis/canvas/issues) and we will
+get to it when we have time.
 
 ## See also
 
