@@ -83,7 +83,7 @@ They also restore default value after drawing is performed so it will not interf
 
 #### Example
 
-Combining properties and method directive can be examine on the following example.
+Combining properties and method directive can be examined on the following example.
 Consider drawing two rectangles with native commands:
 
 ```javascript
@@ -122,7 +122,7 @@ This is equivalent to the following HTML
 </canvas>
 ```
 
-And it will give you this:
+And both will give you this result:
 
 [![canvas.png](https://i.postimg.cc/MZf2XV83/canvas.png)](https://postimg.cc/7b4QWChS)
 
