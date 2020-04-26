@@ -83,7 +83,7 @@ They also restore default value after drawing is performed so it will not interf
 
 #### Example
 
-Combining properties and method directive can be examined on the following example.
+Combining properties and method directive can be examined on the following case.
 Consider drawing two rectangles with native commands:
 
 ```javascript
