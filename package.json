@@ -1,8 +1,17 @@
 {
     "name": "@ng-web-apis/canvas",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "A library for declarative use of Canvas API with Angular",
-    "keywords": ["angular", "ng", "canvas", "svg", "2d", "3d", "webgl", "graphic"],
+    "keywords": [
+        "angular",
+        "ng",
+        "canvas",
+        "svg",
+        "2d",
+        "3d",
+        "webgl",
+        "graphic"
+    ],
     "scripts": {
         "ng": "ng",
         "start": "ng serve",
@@ -34,7 +43,9 @@
         "name": "Alexander Inkin",
         "email": "alexander@inkin.ru"
     },
-    "contributors": ["Roman Sedov <79601794011@ya.ru>"],
+    "contributors": [
+        "Roman Sedov <79601794011@ya.ru>"
+    ],
     "repository": "https://github.com/ng-web-apis/canvas",
     "bugs": "https://github.com/ng-web-apis/canvas/issues",
     "homepage": "https://github.com/ng-web-apis/canvas#README",
@@ -101,7 +112,10 @@
         }
     },
     "lint-staged": {
-        "*.{js,ts,html,md,less,json}": ["prettier --write", "git add"],
+        "*.{js,ts,html,md,less,json}": [
+            "prettier --write",
+            "git add"
+        ],
         "*.ts": "tslint"
     },
     "standard-version": {
