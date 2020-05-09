@@ -5,8 +5,8 @@ import {CANVAS_2D_CONTEXT} from '../tokens/canvas-2d-context';
 
 export function canvasContextFactory(
     {nativeElement}: ElementRef<HTMLCanvasElement>,
-    opaque: string | null,
-    desynchronized: string | null,
+    opaque: string | null = null,
+    desynchronized: string | null = null,
 ): CanvasRenderingContext2D {
     const context = nativeElement.getContext('2d', {
         alpha: opaque === null,
@@ -28,8 +28,8 @@ export function canvasContextFactory(
             provide: CANVAS_2D_CONTEXT,
             deps: [
                 ElementRef,
-                [new Attribute('opaque')],
-                [new Attribute('desynchronized')],
+                // [new Attribute('opaque')],
+                // [new Attribute('desynchronized')],
             ],
             useFactory: canvasContextFactory,
         },
