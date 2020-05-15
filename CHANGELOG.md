@@ -4,17 +4,14 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### [0.0.3](https://github.com/ng-web-apis/canvas/compare/v0.0.1...v0.0.3) (2020-05-15)
 
-
 ### Bug Fixes
 
-* **context:** fix attributes for Ivy ([8831a32](https://github.com/ng-web-apis/canvas/commit/8831a32))
-* **ivy:** temporary remove attributes until they are fixed in Ivy - https://github.com/angular/angular/issues/36479 ([5c63491](https://github.com/ng-web-apis/canvas/commit/5c63491))
+-   **context:** fix attributes for Ivy ([8831a32](https://github.com/ng-web-apis/canvas/commit/8831a32))
 
 ### [0.0.2](https://github.com/ng-web-apis/canvas/compare/v0.0.1...v0.0.2) (2020-05-09)
 
-
 ### Bug Fixes
 
-* **ivy:** temporary remove attributes until they are fixed in Ivy - https://github.com/angular/angular/issues/36479 ([5395b17](https://github.com/ng-web-apis/canvas/commit/5395b17))
+-   **ivy:** temporary remove attributes until they are fixed in Ivy - https://github.com/angular/angular/issues/36479 ([5395b17](https://github.com/ng-web-apis/canvas/commit/5395b17))
 
 ### 0.0.1 (2020-04-20)
