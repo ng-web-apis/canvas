@@ -3,10 +3,11 @@ import {ANIMATION_FRAME} from '@ng-web-apis/common';
 import {Observable, Subscription} from 'rxjs';
 import {CANVAS_2D_CONTEXT} from '../tokens/canvas-2d-context';
 
+// TODO remove default values once https://github.com/angular/angular/issues/36479 is fixed
 export function canvasContextFactory(
     {nativeElement}: ElementRef<HTMLCanvasElement>,
-    opaque: string | null = null,
-    desynchronized: string | null = null,
+    opaque: string | null = nativeElement.getAttribute('waOpaque'),
+    desynchronized: string | null = nativeElement.getAttribute('waDesynchronized'),
 ): CanvasRenderingContext2D {
     const context = nativeElement.getContext('2d', {
         alpha: opaque === null,
@@ -28,8 +29,8 @@ export function canvasContextFactory(
             provide: CANVAS_2D_CONTEXT,
             deps: [
                 ElementRef,
-                // [new Attribute('opaque')],
-                // [new Attribute('desynchronized')],
+                // [new Attribute('waOpaque')],
+                // [new Attribute('waDesynchronized')],
             ],
             useFactory: canvasContextFactory,
         },
