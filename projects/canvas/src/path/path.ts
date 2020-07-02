@@ -9,7 +9,10 @@ import {CANVAS_METHOD} from '../tokens/canvas-method';
 })
 export class PathDirective {
     @Input()
-    waCanvasPath? = false;
+    closed = false;
+
+    @Input()
+    fillRule?: CanvasFillRule;
 
     @ContentChildren(CANVAS_METHOD as any)
     private readonly pathSteps: QueryList<CanvasMethod> = new QueryList();
@@ -22,12 +25,12 @@ export class PathDirective {
                 step.draw(context);
             });
 
-            if (this.waCanvasPath) {
+            if (this.closed) {
                 context.closePath();
             }
 
             context.stroke();
-            context.fill();
+            context.fill(this.fillRule);
         };
     }
 }

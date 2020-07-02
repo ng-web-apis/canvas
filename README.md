@@ -44,24 +44,23 @@ element to declare 2D context scope. Then use other directives to draw inside
 </canvas>
 ```
 
-## Directives
+## Context
 
-There are 4 types of directives you can use:
-
-1. **Context** directives
-2. **Method** directives
-3. **Properties** directives
-4. **Path** directives
-
-### Context
-
-These are applied to an [`HTMLCanvasElement`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement)
-and are used to defined scope of a particular context:
+First you need to apply 2d context directive to an [`HTMLCanvasElement`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement)
+to defined scope of a particular context for directives:
 
 -   [`waCanvas2d`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D). Supports following attributes
     (see [contextAttributes](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/getContext) for 2D context):
     -   **`opaque`** — `boolean` attribute to set `alpha` to `false`
     -   **`desynchronized`** — `boolean` attribute to set `desynchronized` to `true`
+
+## Directives
+
+There are 3 types of directives you can use:
+
+1. **Method** directives
+2. **Properties** directives
+3. **Path** directives
 
 ### Method
 
@@ -157,7 +156,7 @@ You can use following directives to draw path on Canvas:
 -   [`waCanvasPath`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/beginPath)
 -   [`waCanvasClip`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/clip)
 
-#### Nested path drawing methods
+#### Drawing path
 
 > These go inside `waCanvasPath`/`waCanvasClip` directives. They are declarative
 > counterparts of [`CanvasPath`](https://github.com/microsoft/TypeScript/blob/master/lib/lib.dom.d.ts#L3360) methods
