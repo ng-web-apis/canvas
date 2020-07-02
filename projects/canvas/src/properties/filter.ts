@@ -14,12 +14,12 @@ const DEFAULT = 'none';
         },
     ],
 })
-export class FilterDirective implements CanvasProperty {
-    @Input()
-    waCanvasFilter = DEFAULT;
+export class FilterDirective implements CanvasProperty, CanvasFilters {
+    @Input('waCanvasFilter')
+    filter = DEFAULT;
 
     beforeHook(context: CanvasRenderingContext2D) {
-        context.filter = this.waCanvasFilter;
+        context.filter = this.filter;
     }
 
     afterHook(context: CanvasRenderingContext2D) {

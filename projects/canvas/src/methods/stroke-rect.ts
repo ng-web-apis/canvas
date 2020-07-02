@@ -2,10 +2,10 @@ import {Directive, Inject, Input} from '@angular/core';
 import {DrawService} from '../services/draw.service';
 
 @Directive({
-    selector: '[waCanvasFillRect]',
+    selector: '[waCanvasStrokeRect]',
     providers: [DrawService],
 })
-export class FillRectDirective {
+export class StrokeRectDirective {
     @Input()
     x = 0;
 
@@ -20,7 +20,7 @@ export class FillRectDirective {
 
     constructor(@Inject(DrawService) drawService: DrawService) {
         drawService.draw = context => {
-            context.fillRect(this.x, this.y, this.width, this.height);
+            context.strokeRect(this.x, this.y, this.width, this.height);
         };
     }
 }

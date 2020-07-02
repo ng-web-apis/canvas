@@ -2,27 +2,30 @@ import {Directive, Input} from '@angular/core';
 import {CanvasProperty} from '../interfaces/canvas-property';
 import {CANVAS_PROPERTIES} from '../tokens/canvas-properties';
 
-const DEFAULT = 'source-over';
+const DEFAULT = 1;
 
 @Directive({
-    selector: '[waCanvasGlobalCompositeOperation]',
+    selector: '[waCanvasScaleX],[waCanvasScaleY]',
     providers: [
         {
             provide: CANVAS_PROPERTIES,
-            useExisting: GlobalCompositeOperationDirective,
+            useExisting: ScaleDirective,
             multi: true,
         },
     ],
 })
-export class GlobalCompositeOperationDirective implements CanvasProperty {
-    @Input()
-    waCanvasGlobalCompositeOperation = DEFAULT;
+export class ScaleDirective implements CanvasProperty {
+    @Input('waCanvasScaleX')
+    x = DEFAULT;
+
+    @Input('waCanvasScaleY')
+    y = DEFAULT;
 
     beforeHook(context: CanvasRenderingContext2D) {
-        context.globalCompositeOperation = this.waCanvasGlobalCompositeOperation;
+        context.scale(this.x, this.y);
     }
 
     afterHook(context: CanvasRenderingContext2D) {
-        context.globalCompositeOperation = DEFAULT;
+        context.scale(DEFAULT, DEFAULT);
     }
 }

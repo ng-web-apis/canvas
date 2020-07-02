@@ -34,7 +34,7 @@ export class DrawImageDirective {
     sHeight?: number;
 
     constructor(@Inject(DrawService) drawService: DrawService) {
-        drawService.init(context => {
+        drawService.draw = context => {
             if (!this.waCanvasDrawImage) {
                 return;
             }
@@ -69,6 +69,6 @@ export class DrawImageDirective {
             } else {
                 context.drawImage(this.waCanvasDrawImage, this.dX, this.dY);
             }
-        });
+        };
     }
 }

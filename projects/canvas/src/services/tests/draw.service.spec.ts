@@ -1,5 +1,6 @@
-import {CanvasProperty, DrawService} from '@ng-web-apis/canvas';
 import {of} from 'rxjs';
+import {CanvasProperty} from '../../interfaces/canvas-property';
+import {DrawService} from '../draw.service';
 
 describe('DrawService', () => {
     const canvas = document.createElement('canvas');

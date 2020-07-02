@@ -2,10 +2,13 @@ import {Directive, Inject, Input} from '@angular/core';
 import {DrawService} from '../services/draw.service';
 
 @Directive({
-    selector: '[waCanvasFillRect]',
+    selector: '[waCanvasStrokeText]',
     providers: [DrawService],
 })
-export class FillRectDirective {
+export class StrokeTextDirective {
+    @Input()
+    text = '';
+
     @Input()
     x = 0;
 
@@ -13,14 +16,11 @@ export class FillRectDirective {
     y = 0;
 
     @Input()
-    width = 0;
-
-    @Input()
-    height = 0;
+    maxWidth?: number;
 
     constructor(@Inject(DrawService) drawService: DrawService) {
         drawService.draw = context => {
-            context.fillRect(this.x, this.y, this.width, this.height);
+            context.strokeText(this.text, this.x, this.y, this.maxWidth);
         };
     }
 }

@@ -5,24 +5,29 @@ import {CANVAS_PROPERTIES} from '../tokens/canvas-properties';
 const DEFAULT = '#000';
 
 @Directive({
-    selector: '[waCanvasFillStyle]',
+    selector: '[waCanvasFillStyle],[waCanvasStrokeStyle]',
     providers: [
         {
             provide: CANVAS_PROPERTIES,
-            useExisting: FillStyleDirective,
+            useExisting: FillStrokeStylesDirective,
             multi: true,
         },
     ],
 })
-export class FillStyleDirective implements CanvasProperty {
-    @Input()
-    waCanvasFillStyle: string | CanvasGradient | CanvasPattern = DEFAULT;
+export class FillStrokeStylesDirective implements CanvasProperty {
+    @Input('waCanvasFillStyle')
+    fillStyle = DEFAULT;
+
+    @Input('waCanvasStrokeStyle')
+    strokeStyle = DEFAULT;
 
     beforeHook(context: CanvasRenderingContext2D) {
-        context.fillStyle = this.waCanvasFillStyle;
+        context.fillStyle = this.fillStyle;
+        context.strokeStyle = this.strokeStyle;
     }
 
     afterHook(context: CanvasRenderingContext2D) {
         context.fillStyle = DEFAULT;
+        context.strokeStyle = DEFAULT;
     }
 }
