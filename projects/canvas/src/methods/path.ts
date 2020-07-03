@@ -4,34 +4,33 @@ import {DrawService} from '../services/draw.service';
 import {CANVAS_METHOD} from '../tokens/canvas-method';
 
 @Directive({
-    selector: '[waCanvasClip]',
+    selector: 'canvas-path:not([path])',
     providers: [DrawService],
 })
-export class ClipDirective {
+export class PathDirective {
     @Input()
-    fillRule?: CanvasFillRule;
+    closed = false;
 
     @Input()
-    path?: Path2D;
+    fillRule?: CanvasFillRule;
 
     @ContentChildren(CANVAS_METHOD as any)
     private readonly pathSteps: QueryList<CanvasMethod> = new QueryList();
 
     constructor(@Inject(DrawService) drawService: DrawService) {
-        drawService.draw = context => {
-            if (this.path) {
-                context.clip(this.path, this.fillRule);
-
-                return;
-            }
-
+        drawService.call = context => {
             context.beginPath();
 
             this.pathSteps.forEach(step => {
-                step.draw(context);
+                step.call(context);
             });
 
-            context.clip(this.fillRule);
+            if (this.closed) {
+                context.closePath();
+            }
+
+            context.stroke();
+            context.fill(this.fillRule);
         };
     }
 }

@@ -1,11 +1,9 @@
 import {Directive, Input} from '@angular/core';
-import {CanvasProperty} from '../interfaces/canvas-property';
+import {CanvasMethod} from '../interfaces/canvas-method';
 import {CANVAS_PROPERTIES} from '../tokens/canvas-properties';
 
-const DEFAULT = 'none';
-
 @Directive({
-    selector: '[waCanvasFilter]',
+    selector: 'canvas-draw-image[filter],canvas-path[filter],canvas-text[filter]',
     providers: [
         {
             provide: CANVAS_PROPERTIES,
@@ -14,15 +12,11 @@ const DEFAULT = 'none';
         },
     ],
 })
-export class FilterDirective implements CanvasProperty, CanvasFilters {
-    @Input('waCanvasFilter')
-    filter = DEFAULT;
+export class FilterDirective implements CanvasMethod, CanvasFilters {
+    @Input()
+    filter = 'none';
 
-    beforeHook(context: CanvasRenderingContext2D) {
+    call(context: CanvasRenderingContext2D) {
         context.filter = this.filter;
-    }
-
-    afterHook(context: CanvasRenderingContext2D) {
-        context.filter = DEFAULT;
     }
 }

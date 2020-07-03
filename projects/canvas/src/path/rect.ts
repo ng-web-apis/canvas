@@ -3,7 +3,7 @@ import {CanvasMethod} from '../interfaces/canvas-method';
 import {CANVAS_METHOD} from '../tokens/canvas-method';
 
 @Directive({
-    selector: '[waCanvasRect]',
+    selector: 'canvas-rect',
     providers: [
         {
             provide: CANVAS_METHOD,
@@ -24,7 +24,7 @@ export class RectDirective implements CanvasMethod {
     @Input()
     height = 0;
 
-    draw(context: CanvasRenderingContext2D) {
+    call(context: CanvasRenderingContext2D) {
         context.rect(this.x, this.y, this.width, this.height);
     }
 }

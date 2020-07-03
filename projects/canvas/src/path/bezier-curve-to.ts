@@ -3,7 +3,7 @@ import {CanvasMethod} from '../interfaces/canvas-method';
 import {CANVAS_METHOD} from '../tokens/canvas-method';
 
 @Directive({
-    selector: '[waCanvasBezierCurveTo]',
+    selector: 'canvas-bezier-curve-to',
     providers: [
         {
             provide: CANVAS_METHOD,
@@ -30,7 +30,7 @@ export class BezierCurveToDirective implements CanvasMethod {
     @Input()
     y = 0;
 
-    draw(context: CanvasRenderingContext2D) {
+    call(context: CanvasRenderingContext2D) {
         context.bezierCurveTo(this.cp1x, this.cp1y, this.cp2x, this.cp2y, this.x, this.y);
     }
 }

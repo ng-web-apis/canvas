@@ -3,7 +3,7 @@ import {CanvasMethod} from '../interfaces/canvas-method';
 import {CANVAS_METHOD} from '../tokens/canvas-method';
 
 @Directive({
-    selector: '[waCanvasArc]',
+    selector: 'canvas-arc',
     providers: [
         {
             provide: CANVAS_METHOD,
@@ -30,7 +30,7 @@ export class ArcDirective implements CanvasMethod {
     @Input()
     anticlockwise = false;
 
-    draw(context: CanvasRenderingContext2D) {
+    call(context: CanvasRenderingContext2D) {
         context.arc(
             this.x,
             this.y,

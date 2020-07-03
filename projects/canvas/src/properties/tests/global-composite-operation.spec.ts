@@ -7,23 +7,12 @@ describe('GlobalCompositeOperationDirective', () => {
     @Component({
         template: `
             <canvas #canvas waCanvas2d width="100" height="100">
-                <ng-container
-                    waCanvasFillRect
-                    waCanvasFillStyle="red"
-                    [x]="0"
-                    [y]="0"
-                    [height]="20"
-                    [width]="20"
-                ></ng-container>
-                <ng-container
-                    waCanvasFillRect
-                    waCanvasFillStyle="green"
-                    waCanvasGlobalCompositeOperation="screen"
-                    [x]="0"
-                    [y]="0"
-                    [height]="20"
-                    [width]="20"
-                ></ng-container>
+                <canvas-path fillStyle="red">
+                    <canvas-rect [x]="0" [y]="0" [height]="20" [width]="20"></canvas-rect>
+                </canvas-path>
+                <canvas-path fillStyle="green" globalCompositeOperation="screen">
+                    <canvas-rect [x]="0" [y]="0" [height]="20" [width]="20"></canvas-rect>
+                </canvas-path>
             </canvas>
         `,
     })

@@ -2,10 +2,10 @@ import {Directive, Inject, Input} from '@angular/core';
 import {DrawService} from '../services/draw.service';
 
 @Directive({
-    selector: '[waCanvasStrokeText]',
+    selector: 'canvas-text',
     providers: [DrawService],
 })
-export class StrokeTextDirective {
+export class TextDirective {
     @Input()
     text = '';
 
@@ -19,7 +19,8 @@ export class StrokeTextDirective {
     maxWidth?: number;
 
     constructor(@Inject(DrawService) drawService: DrawService) {
-        drawService.draw = context => {
+        drawService.call = context => {
+            context.fillText(this.text, this.x, this.y, this.maxWidth);
             context.strokeText(this.text, this.x, this.y, this.maxWidth);
         };
     }

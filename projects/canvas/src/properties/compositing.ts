@@ -1,12 +1,12 @@
 import {Directive, Input} from '@angular/core';
-import {CanvasProperty} from '../interfaces/canvas-property';
+import {CanvasMethod} from '../interfaces/canvas-method';
 import {CANVAS_PROPERTIES} from '../tokens/canvas-properties';
 
-const DEFAULT_ALPHA = 1;
-const DEFAULT_COMPOSITE = 'source-over';
-
 @Directive({
-    selector: '[waCanvasGlobalAlpha],[waCanvasGlobalCompositeOperation]',
+    selector:
+        'canvas-draw-image[globalAlpha],canvas-draw-image[globalCompositeOperation],' +
+        'canvas-path[globalAlpha],canvas-path[globalCompositeOperation],' +
+        'canvas-text[globalAlpha],canvas-text[globalCompositeOperation]',
     providers: [
         {
             provide: CANVAS_PROPERTIES,
@@ -15,20 +15,15 @@ const DEFAULT_COMPOSITE = 'source-over';
         },
     ],
 })
-export class CompositingDirective implements CanvasProperty, CanvasCompositing {
-    @Input('waCanvasGlobalAlpha')
-    globalAlpha = DEFAULT_ALPHA;
+export class CompositingDirective implements CanvasMethod, CanvasCompositing {
+    @Input()
+    globalAlpha = 1;
 
-    @Input('waCanvasGlobalCompositeOperation')
-    globalCompositeOperation = DEFAULT_COMPOSITE;
+    @Input()
+    globalCompositeOperation = 'source-over';
 
-    beforeHook(context: CanvasRenderingContext2D) {
+    call(context: CanvasRenderingContext2D) {
         context.globalAlpha = this.globalAlpha;
         context.globalCompositeOperation = this.globalCompositeOperation;
-    }
-
-    afterHook(context: CanvasRenderingContext2D) {
-        context.globalAlpha = DEFAULT_ALPHA;
-        context.globalCompositeOperation = DEFAULT_COMPOSITE;
     }
 }

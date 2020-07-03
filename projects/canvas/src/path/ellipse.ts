@@ -3,7 +3,7 @@ import {CanvasMethod} from '../interfaces/canvas-method';
 import {CANVAS_METHOD} from '../tokens/canvas-method';
 
 @Directive({
-    selector: '[waCanvasEllipse]',
+    selector: 'canvas-ellipse',
     providers: [
         {
             provide: CANVAS_METHOD,
@@ -36,7 +36,7 @@ export class EllipseDirective implements CanvasMethod {
     @Input()
     anticlockwise = false;
 
-    draw(context: CanvasRenderingContext2D) {
+    call(context: CanvasRenderingContext2D) {
         context.ellipse(
             this.x,
             this.y,

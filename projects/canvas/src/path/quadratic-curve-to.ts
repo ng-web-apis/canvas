@@ -3,7 +3,7 @@ import {CanvasMethod} from '../interfaces/canvas-method';
 import {CANVAS_METHOD} from '../tokens/canvas-method';
 
 @Directive({
-    selector: '[waCanvasQuadraticCurveTo]',
+    selector: 'canvas-quadratic-curve-to',
     providers: [
         {
             provide: CANVAS_METHOD,
@@ -24,7 +24,7 @@ export class QuadraticCurveToDirective implements CanvasMethod {
     @Input()
     y = 0;
 
-    draw(context: CanvasRenderingContext2D) {
+    call(context: CanvasRenderingContext2D) {
         context.quadraticCurveTo(this.cpx, this.cpy, this.x, this.y);
     }
 }

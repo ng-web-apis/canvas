@@ -2,25 +2,20 @@ import {Directive, Inject, Input} from '@angular/core';
 import {DrawService} from '../services/draw.service';
 
 @Directive({
-    selector: '[waCanvasFillRect]',
+    selector: 'canvas-path[path]',
     providers: [DrawService],
 })
-export class FillRectDirective {
+export class Path2dDirective {
     @Input()
-    x = 0;
+    path = new Path2D();
 
     @Input()
-    y = 0;
-
-    @Input()
-    width = 0;
-
-    @Input()
-    height = 0;
+    fillRule?: CanvasFillRule;
 
     constructor(@Inject(DrawService) drawService: DrawService) {
-        drawService.draw = context => {
-            context.fillRect(this.x, this.y, this.width, this.height);
+        drawService.call = context => {
+            context.fill(this.path, this.fillRule);
+            context.stroke(this.path);
         };
     }
 }

@@ -1,11 +1,11 @@
 import {Directive, Input} from '@angular/core';
-import {CanvasProperty} from '../interfaces/canvas-property';
+import {CanvasMethod} from '../interfaces/canvas-method';
 import {CANVAS_PROPERTIES} from '../tokens/canvas-properties';
 
-const DEFAULT = '#000';
-
 @Directive({
-    selector: '[waCanvasFillStyle],[waCanvasStrokeStyle]',
+    selector:
+        'canvas-path[fillStyle],canvas-path[strokeStyle],' +
+        'canvas-text[fillStyle],canvas-text[strokeStyle]',
     providers: [
         {
             provide: CANVAS_PROPERTIES,
@@ -14,20 +14,15 @@ const DEFAULT = '#000';
         },
     ],
 })
-export class FillStrokeStylesDirective implements CanvasProperty {
-    @Input('waCanvasFillStyle')
-    fillStyle = DEFAULT;
+export class FillStrokeStylesDirective implements CanvasMethod {
+    @Input()
+    fillStyle: string | CanvasGradient | CanvasPattern = 'black';
 
-    @Input('waCanvasStrokeStyle')
-    strokeStyle = DEFAULT;
+    @Input()
+    strokeStyle: string | CanvasGradient | CanvasPattern = 'transparent';
 
-    beforeHook(context: CanvasRenderingContext2D) {
+    call(context: CanvasRenderingContext2D) {
         context.fillStyle = this.fillStyle;
         context.strokeStyle = this.strokeStyle;
-    }
-
-    afterHook(context: CanvasRenderingContext2D) {
-        context.fillStyle = DEFAULT;
-        context.strokeStyle = DEFAULT;
     }
 }

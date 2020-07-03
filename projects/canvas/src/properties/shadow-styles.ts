@@ -1,14 +1,11 @@
 import {Directive, Input} from '@angular/core';
 import {CANVAS_PROPERTIES} from '../tokens/canvas-properties';
 
-const DEFAULT_BLUR = 0;
-const DEFAULT_COLOR = 'rgba(0, 0, 0, 0)';
-const DEFAULT_X = 0;
-const DEFAULT_Y = 0;
-
 @Directive({
     selector:
-        '[waCanvasShadowBlur],[waCanvasShadowColor],[waCanvasShadowOffsetX],[waCanvasShadowOffsetY]',
+        'canvas-draw-image[shadowBlur],canvas-draw-image[shadowColor],canvas-draw-image[shadowOffsetX],canvas-draw-image[shadowOffsetY],' +
+        'canvas-path[shadowBlur],canvas-path[shadowColor],canvas-path[shadowOffsetX],canvas-path[shadowOffsetY],' +
+        'canvas-text[shadowBlur],canvas-text[shadowColor],canvas-text[shadowOffsetX],canvas-text[shadowOffsetY]',
     providers: [
         {
             provide: CANVAS_PROPERTIES,
@@ -18,29 +15,22 @@ const DEFAULT_Y = 0;
     ],
 })
 export class ShadowStylesDirective implements CanvasShadowStyles {
-    @Input('waCanvasShadowBlur')
-    shadowBlur = DEFAULT_BLUR;
+    @Input()
+    shadowBlur = 0;
 
-    @Input('waCanvasShadowColor')
-    shadowColor = DEFAULT_COLOR;
+    @Input()
+    shadowColor = 'transparent';
 
-    @Input('waCanvasShadowOffsetX')
-    shadowOffsetX = DEFAULT_X;
+    @Input()
+    shadowOffsetX = 0;
 
-    @Input('waCanvasShadowOffsetY')
-    shadowOffsetY = DEFAULT_Y;
+    @Input()
+    shadowOffsetY = 0;
 
-    beforeHook(context: CanvasRenderingContext2D) {
+    call(context: CanvasRenderingContext2D) {
         context.shadowBlur = this.shadowBlur;
         context.shadowColor = this.shadowColor;
         context.shadowOffsetX = this.shadowOffsetX;
         context.shadowOffsetY = this.shadowOffsetY;
-    }
-
-    afterHook(context: CanvasRenderingContext2D) {
-        context.shadowBlur = DEFAULT_BLUR;
-        context.shadowColor = DEFAULT_COLOR;
-        context.shadowOffsetX = DEFAULT_X;
-        context.shadowOffsetY = DEFAULT_Y;
     }
 }

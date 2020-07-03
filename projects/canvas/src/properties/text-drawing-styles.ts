@@ -1,15 +1,10 @@
 import {Directive, Input} from '@angular/core';
-import {CanvasProperty} from '../interfaces/canvas-property';
+import {CanvasMethod} from '../interfaces/canvas-method';
 import {CANVAS_PROPERTIES} from '../tokens/canvas-properties';
-
-const DEFAULT_DIRECTION: CanvasDirection = 'inherit';
-const DEFAULT_FONT = 'butt';
-const DEFAULT_ALIGN: CanvasTextAlign = 'start';
-const DEFAULT_BASELINE: CanvasTextBaseline = 'alphabetic';
 
 @Directive({
     selector:
-        '[waCanvasDirection],[waCanvasFont],[waCanvasTextAlign],[waCanvasTextBaseline]',
+        'canvas-text[direction],canvas-text[font],canvas-text[textAlign],canvas-text[textBaseline]',
     providers: [
         {
             provide: CANVAS_PROPERTIES,
@@ -18,31 +13,23 @@ const DEFAULT_BASELINE: CanvasTextBaseline = 'alphabetic';
         },
     ],
 })
-export class TextDrawingStylesDirective
-    implements CanvasProperty, CanvasTextDrawingStyles {
-    @Input('waCanvasDirection')
-    direction = DEFAULT_DIRECTION;
+export class TextDrawingStylesDirective implements CanvasMethod, CanvasTextDrawingStyles {
+    @Input()
+    direction: CanvasDirection = 'inherit';
 
-    @Input('waCanvasFont')
-    font = DEFAULT_FONT;
+    @Input()
+    font = '10px sans-serif';
 
-    @Input('waCanvasTextAlign')
-    textAlign = DEFAULT_ALIGN;
+    @Input()
+    textAlign: CanvasTextAlign = 'start';
 
-    @Input('waCanvasTextBaseline')
-    textBaseline = DEFAULT_BASELINE;
+    @Input()
+    textBaseline: CanvasTextBaseline = 'alphabetic';
 
-    beforeHook(context: CanvasRenderingContext2D) {
+    call(context: CanvasRenderingContext2D) {
         context.direction = this.direction;
         context.font = this.font;
         context.textAlign = this.textAlign;
         context.textBaseline = this.textBaseline;
-    }
-
-    afterHook(context: CanvasRenderingContext2D) {
-        context.direction = DEFAULT_DIRECTION;
-        context.font = DEFAULT_FONT;
-        context.textAlign = DEFAULT_ALIGN;
-        context.textBaseline = DEFAULT_BASELINE;
     }
 }

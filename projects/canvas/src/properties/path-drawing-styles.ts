@@ -1,18 +1,12 @@
 import {Directive, Input} from '@angular/core';
-import {CanvasProperty} from '../interfaces/canvas-property';
+import {CanvasMethod} from '../interfaces/canvas-method';
 import {CANVAS_PROPERTIES} from '../tokens/canvas-properties';
-
-const DEFAULT_CAP: CanvasLineCap = 'butt';
-const DEFAULT_DASH_OFFSET = 0;
-const DEFAULT_JOIN: CanvasLineJoin = 'miter';
-const DEFAULT_WIDTH = 1;
-const DEFAULT_DASH: number[] = [];
-const DEFAULT_METER = 10;
 
 // TODO: Replace Pick with Omit
 @Directive({
     selector:
-        '[waCanvasLineCap],[waCanvasLineDashOffset],[waCanvasLineJoin],[waCanvasLineWidth],[waCanvasLineDash],[waCanvasMiterLimit]',
+        'canvas-path[lineCap],canvas-path[lineDashOffset],canvas-path[lineJoin],canvas-path[lineWidth],canvas-path[lineDash],canvas-path[miterLimit],' +
+        'canvas-text[lineCap],canvas-text[lineDashOffset],canvas-text[lineJoin],canvas-text[lineWidth],canvas-text[lineDash],canvas-text[miterLimit]',
     providers: [
         {
             provide: CANVAS_PROPERTIES,
@@ -23,44 +17,35 @@ const DEFAULT_METER = 10;
 })
 export class PathDrawingStylesDirective
     implements
-        CanvasProperty,
+        CanvasMethod,
         Pick<
             CanvasPathDrawingStyles,
             Exclude<keyof CanvasPathDrawingStyles, 'getLineDash' | 'setLineDash'>
         > {
-    @Input('waCanvasLineCap')
-    lineCap = DEFAULT_CAP;
+    @Input()
+    lineCap: CanvasLineCap = 'butt';
 
-    @Input('waCanvasLineDashOffset')
-    lineDashOffset = DEFAULT_DASH_OFFSET;
+    @Input()
+    lineDashOffset = 0;
 
-    @Input('waCanvasLineJoin')
-    lineJoin = DEFAULT_JOIN;
+    @Input()
+    lineJoin: CanvasLineJoin = 'miter';
 
-    @Input('waCanvasLineWidth')
-    lineWidth = DEFAULT_WIDTH;
+    @Input()
+    lineWidth = 1;
 
-    @Input('waCanvasLineDash')
-    lineDash = DEFAULT_DASH;
+    @Input()
+    lineDash: number[] = [];
 
-    @Input('waCanvasMiterLimit')
-    miterLimit = DEFAULT_METER;
+    @Input()
+    miterLimit = 10;
 
-    beforeHook(context: CanvasRenderingContext2D) {
+    call(context: CanvasRenderingContext2D) {
         context.lineCap = this.lineCap;
         context.lineDashOffset = this.lineDashOffset;
         context.lineJoin = this.lineJoin;
         context.lineWidth = this.lineWidth;
         context.miterLimit = this.miterLimit;
         context.setLineDash(this.lineDash);
-    }
-
-    afterHook(context: CanvasRenderingContext2D) {
-        context.lineCap = DEFAULT_CAP;
-        context.lineDashOffset = DEFAULT_DASH_OFFSET;
-        context.lineJoin = DEFAULT_JOIN;
-        context.lineWidth = DEFAULT_WIDTH;
-        context.miterLimit = DEFAULT_METER;
-        context.setLineDash(DEFAULT_DASH);
     }
 }

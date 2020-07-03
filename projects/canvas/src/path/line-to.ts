@@ -3,7 +3,7 @@ import {CanvasMethod} from '../interfaces/canvas-method';
 import {CANVAS_METHOD} from '../tokens/canvas-method';
 
 @Directive({
-    selector: '[waCanvasLineTo]',
+    selector: 'canvas-line-to',
     providers: [
         {
             provide: CANVAS_METHOD,
@@ -18,7 +18,7 @@ export class LineToDirective implements CanvasMethod {
     @Input()
     y = 0;
 
-    draw(context: CanvasRenderingContext2D) {
+    call(context: CanvasRenderingContext2D) {
         context.lineTo(this.x, this.y);
     }
 }

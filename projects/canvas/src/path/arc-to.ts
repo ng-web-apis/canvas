@@ -3,7 +3,7 @@ import {CanvasMethod} from '../interfaces/canvas-method';
 import {CANVAS_METHOD} from '../tokens/canvas-method';
 
 @Directive({
-    selector: '[waCanvasArcTo]',
+    selector: 'canvas-arc-to',
     providers: [
         {
             provide: CANVAS_METHOD,
@@ -27,7 +27,7 @@ export class ArcToDirective implements CanvasMethod {
     @Input()
     radius = 0;
 
-    draw(context: CanvasRenderingContext2D) {
+    call(context: CanvasRenderingContext2D) {
         context.arcTo(this.x1, this.y1, this.x2, this.y2, this.radius);
     }
 }

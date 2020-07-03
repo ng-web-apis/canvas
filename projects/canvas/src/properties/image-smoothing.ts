@@ -1,12 +1,12 @@
 import {Directive, Input} from '@angular/core';
-import {CanvasProperty} from '../interfaces/canvas-property';
+import {CanvasMethod} from '../interfaces/canvas-method';
 import {CANVAS_PROPERTIES} from '../tokens/canvas-properties';
 
-const DEFAULT_ENABLED = true;
-const DEFAULT_QUALITY: ImageSmoothingQuality = 'low';
-
 @Directive({
-    selector: '[waCanvasImageSmoothingEnabled],[waCanvasUmageSmoothingQuality]',
+    selector:
+        'canvas-draw-image[imageSmoothingEnabled],canvas-draw-image[imageSmoothingQuality],' +
+        'canvas-path[imageSmoothingEnabled],canvas-path[imageSmoothingQuality],' +
+        'canvas-text[imageSmoothingEnabled],canvas-text[imageSmoothingQuality]',
     providers: [
         {
             provide: CANVAS_PROPERTIES,
@@ -15,20 +15,15 @@ const DEFAULT_QUALITY: ImageSmoothingQuality = 'low';
         },
     ],
 })
-export class ImageSmoothingDirective implements CanvasProperty, CanvasImageSmoothing {
-    @Input('waCanvasImageSmoothingEnabled')
-    imageSmoothingEnabled = DEFAULT_ENABLED;
+export class ImageSmoothingDirective implements CanvasMethod, CanvasImageSmoothing {
+    @Input()
+    imageSmoothingEnabled = true;
 
-    @Input('waCanvasUmageSmoothingQuality')
-    imageSmoothingQuality = DEFAULT_QUALITY;
+    @Input()
+    imageSmoothingQuality: ImageSmoothingQuality = 'low';
 
-    beforeHook(context: CanvasRenderingContext2D) {
+    call(context: CanvasRenderingContext2D) {
         context.imageSmoothingEnabled = this.imageSmoothingEnabled;
         context.imageSmoothingQuality = this.imageSmoothingQuality;
-    }
-
-    afterHook(context: CanvasRenderingContext2D) {
-        context.imageSmoothingEnabled = DEFAULT_ENABLED;
-        context.imageSmoothingQuality = DEFAULT_QUALITY;
     }
 }
