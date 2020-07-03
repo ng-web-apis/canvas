@@ -8,15 +8,14 @@ describe('Canvas2dDirective', () => {
     @Component({
         template: `
             <canvas #canvas waCanvas2d width="100" height="100">
-                <ng-container
-                    waCanvasFillRect
-                    waCanvasFillStyle="red"
-                    waCanvasFilter="hue-rotate(180deg)"
-                    [x]="10"
-                    [y]="10"
-                    [height]="20"
-                    [width]="20"
-                ></ng-container>
+                <canvas-path fillStyle="red" filter="hue-rotate(180deg)">
+                    <canvas-rect
+                        [x]="10"
+                        [y]="10"
+                        [height]="20"
+                        [width]="20"
+                    ></canvas-rect>
+                </canvas-path>
             </canvas>
         `,
     })

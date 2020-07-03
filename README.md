@@ -33,66 +33,102 @@ element to declare 2D context scope. Then use other directives to draw inside
 [`canvas`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/canvas):
 
 ```html
-<canvas waCanvas2d>
-    <ng-container
-        waCanvasFillRect
-        [x]="0"
-        [y]="0"
-        [width]="100"
-        [height]="50"
-    ></ng-container>
+<canvas-path waCanvas2d>
+    <canvas-path fillStyle="red">
+        <canvas-rect
+            [x]="0"
+            [y]="0"
+            [width]="100"
+            [height]="50"
+        ></canvas-rect>
+    </canvas-path>
 </canvas>
 ```
+
+Context directive supports following attributes
+(see [contextAttributes](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/getContext) for 2D context):
+
+-   **`opaque`** — `boolean` attribute to set `alpha` to `false`
+-   **`desynchronized`** — `boolean` attribute to set `desynchronized` to `true`
 
 ## Directives
 
 There are 3 types of directives you can use:
 
-1. **Context** directives
-2. **Method** directives
-3. **Properties** directives:
-
-### Context
-
-These are applied to an [`HTMLCanvasElement`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement)
-and are used to defined scope of a particular context:
-
--   [`waCanvas2d`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D). Supports following attributes
-    (see [contextAttributes](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/getContext) for 2D context):
-    -   **`opaque`** — `boolean` attribute to set `alpha` to `false`
-    -   **`desynchronized`** — `boolean` attribute to set `desynchronized` to `true`
+1. **Method** directives
+2. **Properties** directives
+3. **Path** directives
 
 ### Method
 
-These are your typical directives to draw things on `canvas`. They are
-declarative counterparts of methods existing on
-[`CanvasRenderingContext2D`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D):
+These are basic directives to draw things on `canvas`.
 
--   [`waCanvasFillRect`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/fillRect)
--   [`waCanvasDrawImage`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/drawImage)
+-   [`canvas-draw-image`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/drawImage)
+-   [`canvas-text`](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Drawing_text)
+-   [`canvas-path`](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Drawing_shapes)
+    -   You can use `path` input to pass [`Path2D`](https://developer.mozilla.org/en-US/docs/Web/API/Path2D)
+        if you do not need IE support
 
 ### Properties
 
 These directives set properties of [`CanvasRenderingContext2D`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D).
-They must be added to a method directive and they change context property before calling the method.
+They must be applied to a method directive and they change context property before calling the method.
 They also restore default value after drawing is performed so it will not interfere with the rest of picture.
 
--   [`waCanvasFillStyle`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/fillStyle)
--   [`waCanvasFilter`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/filter)
--   [`waCanvasGlobalCompositeOperation`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/globalCompositeOperation)
+-   [`direction`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/direction)
+-   [`fillStyle`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/fillStyle)
+-   [`filter`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/filter)
+-   [`imageSmoothingEnabled`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/imageSmoothingEnabled)
+-   [`imageSmoothingQuality`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/imageSmoothingQuality)
+-   [`font`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/font)
+-   [`globalAlpha`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/globalAlpha)
+-   [`globalCompositeOperation`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/globalCompositeOperation)
+-   [`lineCap`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineCap)
+-   [`lineDashOffset`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineDashOffset)
+-   [`lineJoin`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineJoin)
+-   [`lineWidth`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineWidth)
+-   [`lineDash`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/setLineDash)
+-   [`miterLimit`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/miterLimit)
+-   [`strokeStyle`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/strokeStyle)
+-   [`textAlign`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/textAlign)
+-   [`textBaseline`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/textBaseline)
+-   [`shadowBlur`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/shadowBlur)
+-   [`shadowColor`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/shadowColor)
+-   [`shadowOffsetX`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/shadowOffsetX)
+-   [`shadowOffsetY`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/shadowOffsetY)
 
-#### Example
+### Path
 
-Combining properties and method directive can be examined on the following case.
+You can use following directives to draw path on Canvas.
+They must be children of `canvas-path` directive:
+
+-   [`canvas-arc`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/arc)
+-   [`canvas-arc-to`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/arcTo)
+-   [`canvas-bezier-curve-to`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/bezierCurveTo)
+-   [`canvas-ellipse`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/ellipse)
+-   [`canvas-line-to`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/lineTo)
+-   [`canvas-move-to`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/moveTo)
+-   [`canvas-quadratic-curve-to`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/quadraticCurveTo)
+-   [`canvas-rect`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/rect)
+
+### Example
+
+Combining properties, method and path directives can be examined on the following case.
 Consider drawing two rectangles with native commands:
 
 ```javascript
 function drawTwoRectangles(context) {
+    context.beginPath();
     context.fillStyle = 'red';
-    context.fillRect(0, 0, 100, 50);
+    context.rect(0, 0, 100, 50);
+    context.fill();
+
+    context.beginPath();
     context.fillStyle = 'green';
     context.globalCompositeOperation = 'screen';
-    context.fillRect(25, 25, 100, 50);
+    context.rect(25, 25, 100, 50);
+    context.fill();
+
     context.fillStyle = '#000';
     context.globalCompositeOperation = 'source-over';
 }
@@ -102,23 +138,12 @@ This is equivalent to the following HTML
 
 ```html
 <canvas waCanvas2d>
-    <ng-container
-        waCanvasFillRect
-        waCanvasFillStyle="red"
-        [x]="0"
-        [y]="0"
-        [width]="100"
-        [height]="50"
-    ></ng-container>
-    <ng-container
-        waCanvasFillRect
-        waCanvasFillStyle="green"
-        waCanvasGlobalCompositeOperation="screen"
-        [x]="25"
-        [y]="25"
-        [width]="100"
-        [height]="50"
-    ></ng-container>
+    <canvas-path fillStyle="red">
+        <canvas-rect [x]="0" [y]="0" [width]="100" [height]="50"></canvas-rect>
+    </canvas-path>
+    <canvas-path fillStyle="green" globalCompositeOperation="screen">
+        <canvas-rect [x]="25" [y]="25" [width]="100" [height]="50"></canvas-rect>
+    </canvas-path>
 </canvas>
 ```
 
@@ -126,18 +151,31 @@ And both will give you this result:
 
 [![canvas.png](https://i.postimg.cc/MZf2XV83/canvas.png)](https://postimg.cc/7b4QWChS)
 
-## Development status
+## Pipes
 
-[Canvas API](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API)
-is a vast topic. This library was created because of personal need for a few
-methods and properties on a 2D context. There is no particular schedule for
-implementing the rest of the API. If you need something that is missing it
-is rather easy to add given existing examples of
-[method](https://github.com/ng-web-apis/canvas/blob/master/projects/canvas/src/methods/fill-rect.ts) and
-[property](https://github.com/ng-web-apis/canvas/blob/master/projects/canvas/src/properties/global-composite-operation.ts) directives so
-PRs are very welcome. Alternatively, feel free to
-[file an issue](https://github.com/ng-web-apis/canvas/issues) and we will
-get to it when we have time.
+You can use [Pipes](https://angular.io/guide/pipes) to create some of the
+classes, required for particular Canvas operations:
+
+-   `gradient` to create [CanvasGradient](https://developer.mozilla.org/en-US/docs/Web/API/CanvasGradient)
+-   `path` to create [Path2D](https://developer.mozilla.org/en-US/docs/Web/API/Path2D)
+-   `pattern` to create [CanvasPattern](https://developer.mozilla.org/en-US/docs/Web/API/CanvasPattern)
+-   `rad` to convert degrees into radians
+
+## TODO
+
+-   [Tranformations](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Transformations):
+    -   [scale](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/scale)
+    -   [rotate](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/rotate)
+    -   [translate](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/translate)
+    -   [transform](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/transform)
+-   [Clipping](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/clip)
+
+## Notes
+
+-   Performance-wise it would of course be slower than performing imperative commands
+    and optimizing them manually. But unless you are making a video game with heavy
+    render cycle this shouldn't be noticeable.
+-   Unlike raw canvas, default stroke color is transparent to align behavior with SVG.
 
 ## See also
 

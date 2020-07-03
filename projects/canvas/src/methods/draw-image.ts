@@ -2,12 +2,12 @@ import {Directive, Inject, Input} from '@angular/core';
 import {DrawService} from '../services/draw.service';
 
 @Directive({
-    selector: '[waCanvasDrawImage]',
+    selector: 'canvas-draw-image',
     providers: [DrawService],
 })
 export class DrawImageDirective {
     @Input()
-    waCanvasDrawImage?: CanvasImageSource;
+    image?: CanvasImageSource;
 
     @Input()
     dX = 0;
@@ -34,8 +34,8 @@ export class DrawImageDirective {
     sHeight?: number;
 
     constructor(@Inject(DrawService) drawService: DrawService) {
-        drawService.init(context => {
-            if (!this.waCanvasDrawImage) {
+        drawService.call = context => {
+            if (!this.image) {
                 return;
             }
 
@@ -48,7 +48,7 @@ export class DrawImageDirective {
                 this.dHeight !== undefined
             ) {
                 context.drawImage(
-                    this.waCanvasDrawImage,
+                    this.image,
                     this.sX,
                     this.sY,
                     this.sWidth,
@@ -60,15 +60,15 @@ export class DrawImageDirective {
                 );
             } else if (this.dWidth !== undefined && this.dHeight !== undefined) {
                 context.drawImage(
-                    this.waCanvasDrawImage,
+                    this.image,
                     this.dX,
                     this.dY,
                     this.dWidth,
                     this.dHeight,
                 );
             } else {
-                context.drawImage(this.waCanvasDrawImage, this.dX, this.dY);
+                context.drawImage(this.image, this.dX, this.dY);
             }
-        });
+        };
     }
 }

@@ -8,17 +8,17 @@ describe('Canvas2dDirective', () => {
         template: `
             <canvas #canvas waCanvas2d width="100" height="100">
                 <!--Empty image doesn't throw (in case it is still loading)-->
-                <ng-container [waCanvasDrawImage]="loading"></ng-container>
-                <ng-container [waCanvasDrawImage]="image"></ng-container>
-                <ng-container
-                    [waCanvasDrawImage]="image"
+                <canvas-draw-image [image]="loading"></canvas-draw-image>
+                <canvas-draw-image [image]="image"></canvas-draw-image>
+                <canvas-draw-image
+                    [image]="image"
                     [dX]="10"
                     [dY]="10"
                     [dWidth]="10"
                     [dHeight]="10"
-                ></ng-container>
-                <ng-container
-                    [waCanvasDrawImage]="offset"
+                ></canvas-draw-image>
+                <canvas-draw-image
+                    [image]="offset"
                     [sX]="1"
                     [sY]="1"
                     [sWidth]="1"
@@ -27,7 +27,7 @@ describe('Canvas2dDirective', () => {
                     [dY]="30"
                     [dWidth]="1"
                     [dHeight]="1"
-                ></ng-container>
+                ></canvas-draw-image>
             </canvas>
         `,
     })

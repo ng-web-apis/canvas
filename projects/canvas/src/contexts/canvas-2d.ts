@@ -45,6 +45,7 @@ export class Canvas2dDirective implements OnDestroy {
         @Attribute('opaque') _opaque: string | null,
         @Attribute('desynchronized') _desynchronized: string | null,
     ) {
+        context.strokeStyle = 'transparent';
         this.subscription = animationFrame$.subscribe(() => {
             context.save();
             context.setTransform(1, 0, 0, 1, 0, 0);

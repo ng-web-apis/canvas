@@ -26,6 +26,14 @@ export class AppComponent {
 
     globalCompositeOperation = 'source-over';
 
+    mouth = 30;
+    blur = 0;
+    offset = 0;
+
+    font = 'bold 40px "Lucida Bright"';
+    text = 'PAC-MAN';
+    color = '#ffa500';
+
     readonly image = new Image();
 
     constructor() {
