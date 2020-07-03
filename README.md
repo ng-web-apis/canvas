@@ -159,7 +159,7 @@ classes, required for particular Canvas operations:
 -   `gradient` to create [CanvasGradient](https://developer.mozilla.org/en-US/docs/Web/API/CanvasGradient)
 -   `path` to create [Path2D](https://developer.mozilla.org/en-US/docs/Web/API/Path2D)
 -   `pattern` to create [CanvasPattern](https://developer.mozilla.org/en-US/docs/Web/API/CanvasPattern)
--   `rad` to to convert degrees into radians
+-   `rad` to convert degrees into radians
 
 ## TODO
 
