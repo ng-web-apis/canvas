@@ -33,7 +33,7 @@ element to declare 2D context scope. Then use other directives to draw inside
 [`canvas`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/canvas):
 
 ```html
-<canvas-path waCanvas2d>
+<canvas waCanvas2d>
     <canvas-path fillStyle="red">
         <canvas-rect
             [x]="0"
