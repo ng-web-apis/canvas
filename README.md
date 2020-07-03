@@ -45,7 +45,7 @@ element to declare 2D context scope. Then use other directives to draw inside
 </canvas>
 ```
 
-Context directive supports following attributes
+Context directive supports the following attributes
 (see [contextAttributes](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/getContext) for 2D context):
 
 -   **`opaque`** — `boolean` attribute to set `alpha` to `false`
