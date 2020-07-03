@@ -8,10 +8,13 @@ describe('DrawService', () => {
     const prop: CanvasMethod = {
         call: jasmine.createSpy('call'),
     };
+    const zone = {
+        runOutsideAngular: (fn: Function) => fn(),
+    };
 
     it('calls hooks with context', () => {
         // @ts-ignore
-        const service = new DrawService([prop], context, of(0));
+        const service = new DrawService([prop], context, of(0), zone);
 
         expect(prop.call).toHaveBeenCalledWith(context);
     });
