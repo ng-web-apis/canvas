@@ -1,6 +1,6 @@
-import {Attribute, Directive, ElementRef, Inject, OnDestroy} from '@angular/core';
-import {ANIMATION_FRAME} from '@ng-web-apis/common';
-import {Observable, Subscription} from 'rxjs';
+import {Attribute, Directive, ElementRef, Inject} from '@angular/core';
+import {CanvasMethod} from '../interfaces/canvas-method';
+import {DrawService} from '../services/draw.service';
 import {CANVAS_2D_CONTEXT} from '../tokens/canvas-2d-context';
 
 // TODO remove default values once https://github.com/angular/angular/issues/36479 is fixed
@@ -34,27 +34,19 @@ export function canvasContextFactory(
             ],
             useFactory: canvasContextFactory,
         },
+        DrawService,
     ],
 })
-export class Canvas2dDirective implements OnDestroy {
-    private readonly subscription: Subscription;
-
+export class Canvas2dDirective {
     constructor(
         @Inject(CANVAS_2D_CONTEXT) context: CanvasRenderingContext2D,
-        @Inject(ANIMATION_FRAME) animationFrame$: Observable<number>,
+        @Inject(DrawService) method: CanvasMethod,
         @Attribute('opaque') _opaque: string | null,
         @Attribute('desynchronized') _desynchronized: string | null,
     ) {
         context.strokeStyle = 'transparent';
-        this.subscription = animationFrame$.subscribe(() => {
-            context.save();
-            context.setTransform(1, 0, 0, 1, 0, 0);
+        method.call = context => {
             context.clearRect(0, 0, context.canvas.width, context.canvas.height);
-            context.restore();
-        });
-    }
-
-    ngOnDestroy() {
-        this.subscription.unsubscribe();
+        };
     }
 }

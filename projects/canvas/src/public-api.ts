@@ -9,6 +9,7 @@ export * from './contexts/canvas-2d';
 export * from './interfaces/canvas-method';
 
 /* Methods */
+export * from './methods/clip-path';
 export * from './methods/draw-image';
 export * from './methods/path';
 export * from './methods/path-2d';

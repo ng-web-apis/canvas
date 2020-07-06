@@ -17,8 +17,8 @@ export class PathDirective {
     @ContentChildren(CANVAS_METHOD as any)
     private readonly pathSteps: QueryList<CanvasMethod> = new QueryList();
 
-    constructor(@Inject(DrawService) drawService: DrawService) {
-        drawService.call = context => {
+    constructor(@Inject(DrawService) method: CanvasMethod) {
+        method.call = context => {
             context.beginPath();
 
             this.pathSteps.forEach(step => {
