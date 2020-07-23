@@ -3,14 +3,27 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {CanvasModule} from '../../module';
 import {CANVAS_2D_CONTEXT} from '../../tokens/canvas-2d-context';
 
-describe('GlobalCompositeOperationDirective', () => {
+describe('Properties', () => {
     @Component({
         template: `
             <canvas #canvas waCanvas2d width="100" height="100">
-                <canvas-path fillStyle="red">
+                <canvas-clip-path #clip>
+                    <canvas-rect [x]="5" [y]="5" [width]="20" [height]="20"></canvas-rect>
+                </canvas-clip-path>
+                <canvas-path fillStyle="red" [clip]="clip">
                     <canvas-rect [x]="0" [y]="0" [height]="20" [width]="20"></canvas-rect>
                 </canvas-path>
                 <canvas-path fillStyle="green" globalCompositeOperation="screen">
+                    <canvas-rect [x]="0" [y]="0" [height]="20" [width]="20"></canvas-rect>
+                </canvas-path>
+                <canvas-path
+                    lineCap="round"
+                    lineJoin="round"
+                    imageSmoothingQuality="high"
+                    shadowColor="pink"
+                    [clip]="'L 1 1' | path"
+                    [imageSmoothingEnabled]="false"
+                >
                     <canvas-rect [x]="0" [y]="0" [height]="20" [width]="20"></canvas-rect>
                 </canvas-path>
             </canvas>
@@ -37,9 +50,21 @@ describe('GlobalCompositeOperationDirective', () => {
         fixture.detectChanges();
     });
 
-    it('overlays layers with given mode', done => {
+    it('clipping works', done => {
         setTimeout(() => {
             expect([...testComponent.context.getImageData(0, 0, 1, 1).data]).toEqual([
+                0,
+                128,
+                0,
+                255,
+            ]);
+            done();
+        }, 50);
+    });
+
+    it('overlays layers with given mode', done => {
+        setTimeout(() => {
+            expect([...testComponent.context.getImageData(10, 10, 1, 1).data]).toEqual([
                 255,
                 128,
                 0,
