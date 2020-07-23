@@ -85,7 +85,7 @@ describe('Methods', () => {
                 0,
                 0,
                 0,
-                0,
+                255,
             ]);
             expect([...testComponent.context.getImageData(0, 0, 1, 1).data]).toEqual([
                 255,
