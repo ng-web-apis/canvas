@@ -35,12 +35,7 @@ element to declare 2D context scope. Then use other directives to draw inside
 ```html
 <canvas waCanvas2d>
     <canvas-path fillStyle="red">
-        <canvas-rect
-            [x]="0"
-            [y]="0"
-            [width]="100"
-            [height]="50"
-        ></canvas-rect>
+        <canvas-rect [x]="0" [y]="0" [width]="100" [height]="50"></canvas-rect>
     </canvas-path>
 </canvas>
 ```
@@ -63,6 +58,7 @@ There are 3 types of directives you can use:
 
 These are basic directives to draw things on `canvas`.
 
+-   [`canvas-clip-path`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/clip)
 -   [`canvas-draw-image`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/drawImage)
 -   [`canvas-text`](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Drawing_text)
 -   [`canvas-path`](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Drawing_shapes)
@@ -75,6 +71,9 @@ These directives set properties of [`CanvasRenderingContext2D`](https://develope
 They must be applied to a method directive and they change context property before calling the method.
 They also restore default value after drawing is performed so it will not interfere with the rest of picture.
 
+-   [`clip`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/clip)
+    -   Either pass a reference to `canvas-clip-path` directive or a [`Path2D`](https://developer.mozilla.org/en-US/docs/Web/API/Path2D) object
+-   [`clipFillRule`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/clip)
 -   [`direction`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/direction)
 -   [`fillStyle`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/fillStyle)
 -   [`filter`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/filter)
@@ -168,7 +167,6 @@ classes, required for particular Canvas operations:
     -   [rotate](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/rotate)
     -   [translate](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/translate)
     -   [transform](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/transform)
--   [Clipping](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/clip)
 
 ## Notes
 

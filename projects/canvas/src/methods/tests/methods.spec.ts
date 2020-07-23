@@ -2,11 +2,16 @@ import {Component, ViewChild} from '@angular/core';
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {CanvasModule} from '../../module';
 import {CANVAS_2D_CONTEXT} from '../../tokens/canvas-2d-context';
+import {ClipPathComponent} from '../clip-path';
 
-describe('Canvas2dDirective', () => {
+describe('Methods', () => {
     @Component({
         template: `
             <canvas #canvas waCanvas2d width="100" height="100">
+                <canvas-clip-path>
+                    <canvas-rect></canvas-rect>
+                    <canvas-rect></canvas-rect>
+                </canvas-clip-path>
                 <!--Empty image doesn't throw (in case it is still loading)-->
                 <canvas-draw-image [image]="loading"></canvas-draw-image>
                 <canvas-draw-image [image]="image"></canvas-draw-image>
@@ -28,12 +33,16 @@ describe('Canvas2dDirective', () => {
                     [dWidth]="1"
                     [dHeight]="1"
                 ></canvas-draw-image>
+                <canvas-text textBaseline="top" text="No crash" [x]="50"></canvas-text>
             </canvas>
         `,
     })
     class TestComponent {
         @ViewChild('canvas', {read: CANVAS_2D_CONTEXT})
         readonly context!: CanvasRenderingContext2D;
+
+        @ViewChild(ClipPathComponent)
+        readonly clipPath!: ClipPathComponent;
 
         readonly image = new Image();
 
@@ -122,5 +131,9 @@ describe('Canvas2dDirective', () => {
             ]);
             done();
         }, 50);
+    });
+
+    it('clip collects path segments', () => {
+        expect(testComponent.clipPath.pathSteps.length).toBe(2);
     });
 });

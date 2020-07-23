@@ -1,4 +1,5 @@
 import {Directive, Inject, Input} from '@angular/core';
+import {CanvasMethod} from '../interfaces/canvas-method';
 import {DrawService} from '../services/draw.service';
 
 @Directive({
@@ -12,8 +13,8 @@ export class Path2dDirective {
     @Input()
     fillRule?: CanvasFillRule;
 
-    constructor(@Inject(DrawService) drawService: DrawService) {
-        drawService.call = context => {
+    constructor(@Inject(DrawService) method: CanvasMethod) {
+        method.call = context => {
             context.fill(this.path, this.fillRule);
             context.stroke(this.path);
         };

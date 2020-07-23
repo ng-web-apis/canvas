@@ -1,5 +1,6 @@
 import {NgModule} from '@angular/core';
 import {Canvas2dDirective} from './contexts/canvas-2d';
+import {ClipPathComponent} from './methods/clip-path';
 import {DrawImageDirective} from './methods/draw-image';
 import {PathDirective} from './methods/path';
 import {Path2dDirective} from './methods/path-2d';
@@ -16,6 +17,7 @@ import {GradientPipe} from './pipes/gradient.pipe';
 import {PathPipe} from './pipes/path.pipe';
 import {PatternPipe} from './pipes/pattern.pipe';
 import {RadPipe} from './pipes/rad.pipe';
+import {ClipDirective} from './properties/clip';
 import {CompositingDirective} from './properties/compositing';
 import {FillStrokeStylesDirective} from './properties/fill-stroke-styles';
 import {FilterDirective} from './properties/filter';
@@ -28,6 +30,7 @@ import {TextDrawingStylesDirective} from './properties/text-drawing-styles';
     declarations: [
         Canvas2dDirective,
 
+        ClipPathComponent,
         DrawImageDirective,
         PathDirective,
         Path2dDirective,
@@ -42,6 +45,7 @@ import {TextDrawingStylesDirective} from './properties/text-drawing-styles';
         QuadraticCurveToDirective,
         RectDirective,
 
+        ClipDirective,
         CompositingDirective,
         FillStrokeStylesDirective,
         FilterDirective,
@@ -58,6 +62,7 @@ import {TextDrawingStylesDirective} from './properties/text-drawing-styles';
     exports: [
         Canvas2dDirective,
 
+        ClipPathComponent,
         DrawImageDirective,
         PathDirective,
         Path2dDirective,
@@ -72,6 +77,7 @@ import {TextDrawingStylesDirective} from './properties/text-drawing-styles';
         QuadraticCurveToDirective,
         RectDirective,
 
+        ClipDirective,
         CompositingDirective,
         FillStrokeStylesDirective,
         FilterDirective,
