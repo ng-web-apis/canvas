@@ -33,7 +33,7 @@ describe('Methods', () => {
                     [dWidth]="1"
                     [dHeight]="1"
                 ></canvas-draw-image>
-                <canvas-text textBaseline="top" text="No crash"></canvas-text>
+                <canvas-text textBaseline="top" text="No crash" [x]="50"></canvas-text>
             </canvas>
         `,
     })
@@ -85,7 +85,7 @@ describe('Methods', () => {
                 0,
                 0,
                 0,
-                255,
+                0,
             ]);
             expect([...testComponent.context.getImageData(0, 0, 1, 1).data]).toEqual([
                 255,
