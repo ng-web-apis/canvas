@@ -39,7 +39,7 @@ export function canvasContextFactory(
 })
 export class Canvas2dDirective {
     constructor(
-        @Inject(CANVAS_2D_CONTEXT) context: CanvasRenderingContext2D,
+        @Inject(CANVAS_2D_CONTEXT) private context: CanvasRenderingContext2D,
         @Inject(DrawService) method: CanvasMethod,
         @Attribute('opaque') _opaque: string | null,
         @Attribute('desynchronized') _desynchronized: string | null,
@@ -48,5 +48,9 @@ export class Canvas2dDirective {
         method.call = context => {
             context.clearRect(0, 0, context.canvas.width, context.canvas.height);
         };
+    }
+
+    public getContext(): CanvasRenderingContext2D {
+        return this.context;
     }
 }
